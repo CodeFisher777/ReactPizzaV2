@@ -10,12 +10,12 @@ import {
 } from '../redux/slices/filterSlice';
 import { fetchPizzasRedux, selectPizzaData } from '../redux/slices/pizzaSlice';
 import Categories from '../components/Categories';
-import Sort, { sortList } from '../components/Sort.jsx';
+import Sort, { sortList } from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton.jsx';
+import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = React.useRef(false);
@@ -25,11 +25,11 @@ const Home = () => {
 
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
 
-  const onChangeCategory = React.useCallback((id) => {
+  const onChangeCategory = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
   }, []);
-  const onChangePage = (number) => {
-    dispatch(setCurrentPageCount(number));
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPageCount(page));
   };
 
   const getPizzas = async () => {
@@ -39,6 +39,7 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : '';
 
     dispatch(
+      // @ts-ignore
       fetchPizzasRedux({
         order,
         sortBy,
@@ -70,7 +71,7 @@ const Home = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
-      const sort = sortList.find((obj) => obj.sortProperty === params.sortProperty);
+      const sort = sortList.find((obj: any) => obj.sortProperty === params.sortProperty);
 
       dispatch(
         setFilters({
@@ -87,7 +88,7 @@ const Home = () => {
     getPizzas();
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-  const pizzas = items.map((obj) => <PizzaBlock {...obj} key={obj.id} />);
+  const pizzas = items.map((obj: any) => <PizzaBlock {...obj} key={obj.id} />);
   const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
   return (
     <div className="container">
