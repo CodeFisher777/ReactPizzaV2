@@ -1,5 +1,4 @@
 import './scss/app.scss';
-
 import Home from './pages/Home.jsx';
 import Cart from './pages/Cart.jsx';
 import NotFound from './pages/NotFound.jsx';
