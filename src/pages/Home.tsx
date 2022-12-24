@@ -1,15 +1,12 @@
 import React from 'react';
-
 import qs from 'qs';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 // import { fetchPizzasRedux, SearchPizzaParams } from '../redux/slices/pizzaSlice';
-import Categories from '../components/Categories';
-import Sort, { sortList } from '../components/Sort';
-import PizzaBlock from '../components/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
-import Pagination from '../components/Pagination';
+import { Categories, Sort, PizzaBlock, Skeleton, Pagination } from '../components';
+import { sortList } from '../components/Sort';
+
 import { useAppDispatch } from '../redux/store';
 import { selectFilter } from '../redux/filter/selectors';
 import { selectPizzaData } from '../redux/pizza/selectors';
